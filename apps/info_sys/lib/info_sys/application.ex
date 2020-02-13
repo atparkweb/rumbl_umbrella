@@ -5,6 +5,8 @@ defmodule InfoSys.Application do
 
   def start(_type, _args) do
     children = [
+      InfoSys.Cache,
+      {Task.Supervisor, name: InfoSys.TaskSupervisor},
     ]
 
     opts = [strategy: :one_for_one, name: InfoSys.Supervisor]
