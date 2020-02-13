@@ -33,5 +33,5 @@ defmodule InfoSys.Cache do
       write_concurrency: true])
   end
   
-  defp tab_name(name), do: "#{name}_cache"
+  defp tab_name(name), do: :"#{name}_cache"
 end
