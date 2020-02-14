@@ -17,9 +17,16 @@ defmodule InfoSys.Cache do
     GenServer.start_link(__MODULE__, opts, name: opts[:name])
   end
   
+  @clear_interval :timer.seconds(60)
+  
   def init(opts) do
-    new_table(opts[:name])
-    {:ok, %{}}
+    state = %{
+      interval: opts[:clear_interval] || @clear_interval,
+      timer: nil,
+      table: new_table(opts[:name])
+    }
+    
+    {:ok, schedule_clear(state)}
   end
   
   defp new_table(name) do
