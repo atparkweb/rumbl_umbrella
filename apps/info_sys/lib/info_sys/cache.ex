@@ -29,6 +29,15 @@ defmodule InfoSys.Cache do
     {:ok, schedule_clear(state)}
   end
   
+  def handle_info(:clear, state) do
+    :ets.delete_all_objects(state.table)
+    {:noreply, schedule_clear(state)}
+  end
+  
+  defp schedule_clear(state) do
+    %{state | timer: Process.send_after(self(), :clear, state.interval)}
+  end
+  
   defp new_table(name) do
     name
     |> tab_name()
