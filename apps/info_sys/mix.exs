@@ -23,6 +23,8 @@ defmodule InfoSys.MixProject do
   end
 
   defp deps do
-    []
+    [
+      {:sweet_xml, "~> 0.6.5"}
+    ]
   end
 end
