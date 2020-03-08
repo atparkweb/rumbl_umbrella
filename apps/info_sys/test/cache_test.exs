@@ -3,9 +3,7 @@ defmodule InfoSysTest.CacheTest do
   alias InfoSys.Cache
   @moduletag clear_interval: 100
   
-  @doc """
-  Verify that server shuts down cleanly
-  """
+  # Verify that server shuts down cleanly
   defp assert_shutdown(pid) do
     ref = Process.monitor(pid)
     Process.unlink(pid)
@@ -14,10 +12,7 @@ defmodule InfoSysTest.CacheTest do
     assert_receive {:DOWN, ^ref, :process, ^pid, :killed}
   end
   
-  @doc """
-  Helper to prevent tests from having to sleep for long
-  periods while the test waits on an expected result.
-  """
+  # Helper to prevent tests from having to sleep for long periods while the test waits on an expected result.
   defp eventually(func) do
     if func.() do
       true
